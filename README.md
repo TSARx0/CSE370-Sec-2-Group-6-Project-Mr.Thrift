@@ -1,4 +1,5 @@
 BRACU
+Spring 2025
 CSE370 Lab
 Section 2
 Project name: Mr. Thrift
