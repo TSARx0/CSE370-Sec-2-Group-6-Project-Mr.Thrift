@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['become_seller'])) {
     $nid = $_POST['nid'];
 
-    // Add NID column if not exists (optional defensive code)
+    // Ensure NID column exists (optional)
     $conn->query("ALTER TABLE Seller ADD COLUMN IF NOT EXISTS NID VARCHAR(50)");
 
     $stmt = $conn->prepare("INSERT INTO Seller (User_ID, NID, Delivery_division, Delivery_city, Delivery_street_address, Date)
@@ -141,6 +141,8 @@ $conn->close();
 
 <div class="container">
     <h2>Welcome, <?php echo htmlspecialchars($user_name); ?>!</h2>
+
+    <!-- Profile Update Form -->
     <form method="post">
         <label>Email:</label>
         <input type="email" name="email" value="<?php echo htmlspecialchars($email); ?>" required>
@@ -157,7 +159,21 @@ $conn->close();
         <button type="submit" name="update_profile">Update Profile</button>
     </form>
 
-    <hr>
+    <!-- Separate User Points Block -->
+    <div style="margin-top: 20px; text-align: center;">
+        <a href="user_point.php"
+           style="display: inline-block;
+                  padding: 10px 20px;
+                  background-color: #4CAF50;
+                  color: white;
+                  text-decoration: none;
+                  border-radius: 6px;">
+            View User Points
+        </a>
+    </div>
+
+    <!-- Divider and Seller Section -->
+    <hr style="margin-top: 30px;">
 
     <h3>Seller Status:</h3>
     <?php if ($is_seller): ?>
